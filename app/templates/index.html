@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}ResumeAI Studio — AI Resume Workspace{% endblock %}
+{% block body_class %}page-bg-home{% endblock %}
+{% block content %}
+<section class="hero dashboard-hero reveal">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse-dot"></span> AI-powered career workspace</div>
+    <h1>Turn your experience into a <span class="gradient-text">job-winning resume.</span></h1>
+    <p class="hero-lead">Create a polished resume, run an ATS audit, compare it with a job description and improve weak sections — all from one focused workspace.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('main.generate') }}"><span>✦</span> Build my resume</a>
+      <a class="btn btn-ghost btn-lg" href="{{ url_for('main.analyze') }}">Analyze existing resume <span>→</span></a>
+    </div>
+    <div class="trust-row"><span>✓ PDF & DOCX</span><span>✓ ATS scoring</span><span>✓ Job matching</span><span>✓ Instant export</span></div>
+  </div>
+  <div class="hero-visual reveal-right">
+    <div class="orbit orbit-1"></div><div class="orbit orbit-2"></div>
+    <div class="hero-card glass-card">
+      <div class="mini-top"><span class="status"><i></i> AI analysis</span><span>LIVE</span></div>
+      <div class="score-ring" style="--score:86"><div><strong>86</strong><small>/100</small></div></div>
+      <h3>Resume health</h3><p>Strong profile · ATS ready</p>
+      <div class="metric"><span>ATS compatibility</span><b>92%</b></div><div class="meter"><i style="width:92%"></i></div>
+      <div class="metric"><span>Job match</span><b>84%</b></div><div class="meter cyan"><i style="width:84%"></i></div>
+      <div class="floating-chip chip-one">✦ 12 keywords found</div>
+      <div class="floating-chip chip-two">✓ 8 improvements</div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-grid reveal">
+  <div class="stat-card"><span class="stat-icon purple">✦</span><div><b>{{ resumes|length }}</b><span>Recent resumes</span></div></div>
+  <div class="stat-card"><span class="stat-icon cyan">◎</span><div><b>{{ analyses|length }}</b><span>Recent analyses</span></div></div>
+  <div class="stat-card"><span class="stat-icon green">✓</span><div><b>ATS</b><span>Ready workflow</span></div></div>
+  <div class="stat-card"><span class="stat-icon orange">↗</span><div><b>PDF + DOCX</b><span>Export formats</span></div></div>
+</section>
+
+<section class="section-head reveal"><div><span class="eyebrow">Everything in one place</span><h2>Your career toolkit</h2></div><p>From first draft to final application.</p></section>
+<section class="feature-grid">
+  <a class="feature-card feature-purple reveal" href="{{ url_for('main.generate') }}"><div class="feature-icon">✦</div><span class="feature-number">01</span><h3>AI Resume Builder</h3><p>Structured sections, polished templates and a live-style preview for a professional first impression.</p><span class="feature-link">Start building →</span></a>
+  <a class="feature-card feature-cyan reveal" href="{{ url_for('main.analyze') }}"><div class="feature-icon">◎</div><span class="feature-number">02</span><h3>ATS Resume Analyzer</h3><p>Review structure, keywords, action language, measurable achievements and overall ATS readiness.</p><span class="feature-link">Run analysis →</span></a>
+  <a class="feature-card feature-green reveal" href="{{ url_for('main.analyze') }}"><div class="feature-icon">⌁</div><span class="feature-number">03</span><h3>Job Match Engine</h3><p>Paste a job description and discover matched keywords, missing terms and practical tailoring opportunities.</p><span class="feature-link">Match a job →</span></a>
+  <a class="feature-card feature-orange reveal" href="{{ url_for('main.history') }}"><div class="feature-icon">↗</div><span class="feature-number">04</span><h3>Improve & Export</h3><p>Use analyzer feedback to improve your summary and export the finished resume as PDF or DOCX.</p><span class="feature-link">View workspace →</span></a>
+</section>
+
+<section class="workflow glass-card reveal">
+  <div class="section-head compact"><div><span class="eyebrow">Simple workflow</span><h2>From blank page to application-ready</h2></div></div>
+  <div class="steps"><div class="step"><span>01</span><div><h3>Create</h3><p>Enter your experience and choose a visual template.</p></div></div><div class="step"><span>02</span><div><h3>Analyze</h3><p>Check ATS structure and compare against a target role.</p></div></div><div class="step"><span>03</span><div><h3>Improve</h3><p>Apply targeted feedback and strengthen weak areas.</p></div></div><div class="step"><span>04</span><div><h3>Export</h3><p>Download a clean PDF or editable DOCX.</p></div></div></div>
+</section>
+
+{% if resumes or analyses %}
+<section class="recent-grid reveal">
+  <div class="glass-card list-card"><div class="card-head"><div><span class="eyebrow">Recent</span><h2>Resumes</h2></div><a href="{{ url_for('main.history') }}">View all →</a></div>
+    {% for r in resumes %}<a class="list-row" href="{{ url_for('main.preview',resume_id=r.id) }}"><span class="avatar">{{ r.name[:1]|upper }}</span><span><b>{{ r.name }}</b><small>{{ r.role or 'Resume' }}</small></span><span class="row-arrow">→</span></a>{% else %}<p class="muted">No resumes yet.</p>{% endfor %}
+  </div>
+  <div class="glass-card list-card"><div class="card-head"><div><span class="eyebrow">Recent</span><h2>Analyses</h2></div><a href="{{ url_for('main.history') }}">View all →</a></div>
+    {% for a in analyses %}<a class="list-row" href="{{ url_for('main.analysis_result',analysis_id=a.id) }}"><span class="score-pill">{{ a.score }}</span><span><b>{{ a.filename }}</b><small>ATS {{ a.ats_score }}{% if a.job_match_score %} · Match {{ a.job_match_score }}%{% endif %}</small></span><span class="row-arrow">→</span></a>{% else %}<p class="muted">No analyses yet.</p>{% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

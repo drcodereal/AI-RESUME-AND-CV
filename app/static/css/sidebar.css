@@ -1,0 +1,53 @@
+/* ---------- Dashboard hamburger + off-canvas sidebar ---------- */
+
+.navbar{gap:14px}
+.navbar .auth-area{margin-left:auto;display:flex;align-items:center;gap:10px}
+.navbar .nav-user{font-size:13.5px;font-weight:600;color:var(--text);padding:8px 4px}
+
+.hamburger{width:40px;height:40px;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(139,92,246,.08);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background .25s,transform .2s}
+.hamburger:hover{background:rgba(139,92,246,.16)}
+.hamburger:active{transform:scale(.94)}
+.hamburger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--text);transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .2s}
+.hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.sidebar-overlay{position:fixed;inset:0;background:rgba(12,8,22,.5);backdrop-filter:blur(3px);z-index:190;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.sidebar-overlay.show{opacity:1;pointer-events:auto}
+
+.app-sidebar{position:fixed;top:0;left:0;bottom:0;width:288px;max-width:86vw;z-index:200;background:linear-gradient(180deg,#fffdf9,#faf7f1);border-right:1px solid var(--line);box-shadow:24px 0 60px rgba(30,20,10,.14);display:flex;flex-direction:column;transform:translateX(-104%);transition:transform .45s cubic-bezier(.16,1,.3,1);padding:18px 16px 20px}
+.app-sidebar.open{transform:translateX(0)}
+
+.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 16px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.sidebar-close{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;font-size:14px;transition:.2s}
+.sidebar-close:hover{color:var(--text);background:rgba(139,92,246,.08)}
+
+.sidebar-profile{display:flex;align-items:center;gap:12px;padding:10px 10px;margin-bottom:10px;border-radius:16px;background:rgba(139,92,246,.07)}
+.sidebar-avatar{width:38px;height:38px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;background:linear-gradient(135deg,#7c3aed,#06b6d4)}
+.sidebar-profile b{display:block;font-size:13.5px;color:var(--text)}
+.sidebar-profile small{display:block;font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px}
+
+.sidebar-links{display:flex;flex-direction:column;gap:3px;overflow-y:auto;flex:1}
+.sidebar-link{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:13px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;position:relative;transition:background .22s,color .22s,transform .18s;opacity:0;transform:translateX(-10px)}
+.app-sidebar.open .sidebar-link{animation:sidebarLinkIn .38s cubic-bezier(.16,1,.3,1) forwards}
+.app-sidebar.open .sidebar-link:nth-child(1){animation-delay:.04s}
+.app-sidebar.open .sidebar-link:nth-child(2){animation-delay:.08s}
+.app-sidebar.open .sidebar-link:nth-child(3){animation-delay:.12s}
+.app-sidebar.open .sidebar-link:nth-child(4){animation-delay:.16s}
+.app-sidebar.open .sidebar-link:nth-child(6){animation-delay:.2s}
+.app-sidebar.open .sidebar-link:nth-child(7){animation-delay:.24s}
+@keyframes sidebarLinkIn{to{opacity:1;transform:translateX(0)}}
+.sidebar-link:hover{background:rgba(139,92,246,.09);color:var(--text);transform:translateX(2px)}
+.sidebar-link.active{background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(6,182,212,.1));color:var(--text)}
+.sidebar-link.active:before{content:"";position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:4px;height:22px;border-radius:0 4px 4px 0;background:linear-gradient(180deg,#7c3aed,#06b6d4)}
+.sidebar-icon{width:22px;text-align:center;font-size:15px;flex:0 0 auto}
+.sidebar-divider{height:1px;background:var(--line);margin:8px 4px}
+
+.sidebar-footer{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line);margin-top:10px}
+.sidebar-footer form{margin:0}
+
+body.sidebar-open{overflow:hidden}
+
+@media (min-width:900px){
+  .app-sidebar{width:264px}
+}

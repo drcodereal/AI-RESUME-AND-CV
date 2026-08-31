@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Privacy Policy — ResumeAI Studio{% endblock %}
+{% block content %}
+<div class="page-title-row reveal">
+  <div>
+    <div class="eyebrow">Legal</div>
+    <h1>Privacy <span class="gradient-text">policy.</span></h1>
+    <p>How ResumeAI Studio collects, uses, and protects your data. Last updated 3 DAYS AGO.</p>
+  </div>
+</div>
+
+<section class="legal-layout">
+  <aside class="glass-card legal-nav reveal-left">
+    <span class="eyebrow">On this page</span>
+    <a href="#collect">1. Information we collect</a>
+    <a href="#use">2. How we use it</a>
+    <a href="#storage">3. Storage &amp; retention</a>
+    <a href="#sharing">4. Sharing your data</a>
+    <a href="#rights">5. Your rights</a>
+    <a href="#cookies">6. Cookies</a>
+    <a href="#contact">7. Contact</a>
+  </aside>
+
+  <div class="glass-card legal-card reveal-right">
+    <section id="collect">
+      <h2>1. Information we collect</h2>
+      <p>When you use ResumeAI Studio we collect the details you enter into the resume builder (name, contact info, work history, skills), the resume files you upload for analysis, and basic account information if you register.</p>
+    </section>
+    <section id="use">
+      <h2>2. How we use it</h2>
+      <p>Your data is used only to generate resumes, run ATS analysis, and produce job-match scoring on your behalf. We do not use your resume content to train external models or sell it to advertisers.</p>
+    </section>
+    <section id="storage">
+      <h2>3. Storage &amp; retention</h2>
+      <p>Generated resumes and analysis reports are stored in your account history so you can revisit them later. You can delete individual items at any time from the History page; deleted items are removed from our database.</p>
+    </section>
+    <section id="sharing">
+      <h2>4. Sharing your data</h2>
+      <p>We do not sell or rent your personal data. Limited data may be shared with infrastructure providers (hosting, database) strictly to operate the service, under standard confidentiality terms.</p>
+    </section>
+    <section id="rights">
+      <h2>5. Your rights</h2>
+      <p>You can request a copy of your data, ask us to correct inaccuracies, or request full deletion of your account and associated resumes/analyses at any time by contacting us.</p>
+    </section>
+    <section id="cookies">
+      <h2>6. Cookies</h2>
+      <p>We use minimal, functional cookies to keep you signed in and remember your preferences. We do not use third-party advertising trackers.</p>
+    </section>
+    <section id="contact">
+      <h2>7. Contact</h2>
+      <p>Questions about this policy? Reach out via the contact details on our <a href="{{ url_for('main.index') }}">homepage</a>.</p>
+    </section>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Resume Builder — ResumeAI{% endblock %}
+{% block content %}
+<div class="page-title-row reveal"><div><div class="eyebrow"><span class="pulse-dot"></span> Resume builder</div><h1>Build your <span class="gradient-text">professional story.</span></h1><p>Fill in the essentials. You can refine the resume after the first generation.</p></div><div class="step-badge">STEP <b>01</b> / 03</div></div>
+<form method="post" class="builder-layout" id="resumeForm">
+  <div class="form-panel glass-card reveal">
+    <div class="form-section"><div class="form-section-head"><span class="section-index">01</span><div><h2>Identity</h2><p>How should recruiters identify you?</p></div></div><div class="form-grid two"><label>Full name<input name="name" required placeholder="e.g. Abc"></label><label>Target role<input name="role" placeholder="e.g. Software Engineer"></label><label>Email<input type="email" name="email" placeholder="you@example.com"></label><label>Phone<input name="phone" placeholder="+92 300 1234567"></label></div></div>
+    <div class="form-section"><div class="form-section-head"><span class="section-index">02</span><div><h2>Professional profile</h2><p>Lead with your strongest value.</p></div></div><label>Summary<textarea name="summary" rows="5" data-count="summaryCount" placeholder="Write 2–4 lines describing your experience, strengths and target role..."></textarea><small class="field-count" id="summaryCount">0 characters</small></label></div>
+    <div class="form-section"><div class="form-section-head"><span class="section-index">03</span><div><h2>Experience & evidence</h2><p>Show what you actually achieved.</p></div></div><label>Experience<textarea name="experience" rows="8" placeholder="Company — Role — dates&#10;• Built...&#10;• Improved...&#10;• Reduced...&#10;&#10;Tip: quantify results where possible."></textarea></label><label>Projects<textarea name="projects" rows="7" placeholder="Project name — technology&#10;• What you built&#10;• What problem it solved&#10;• Result or impact"></textarea></label></div>
+    <div class="form-section"><div class="form-section-head"><span class="section-index">04</span><div><h2>Education & skills</h2><p>Make your searchable strengths obvious.</p></div></div><div class="form-grid two"><label>Education<textarea name="education" rows="5" placeholder="Degree — Institution — Year"></textarea></label><label>Skills<textarea name="skills" rows="5" placeholder="Python, SQL, React, Git, Communication..."></textarea></label></div><label>Certifications<textarea name="certifications" rows="4" placeholder="Certification — Issuer — Year"></textarea></label></div>
+  </div>
+  <aside class="builder-side reveal-right">
+    <div class="glass-card sticky-card"><div class="side-title"><div><span class="eyebrow">Design system</span><h2>Choose a template</h2></div><span class="template-status" id="templateStatus">Classic</span></div>
+      <div class="template-options"><label class="template-option selected"><input type="radio" name="template" value="classic" checked><span class="template-preview classic-preview"><i></i><b></b><em></em></span><span><b>Classic</b><small>Recruiter-friendly</small></span></label><label class="template-option"><input type="radio" name="template" value="modern"><span class="template-preview modern-preview"><i></i><b></b><em></em></span><span><b>Modern</b><small>Contemporary</small></span></label><label class="template-option"><input type="radio" name="template" value="minimal"><span class="template-preview minimal-preview"><i></i><b></b><em></em></span><span><b>Minimal</b><small>Clean & focused</small></span></label></div>
+      <div class="quality-box"><div class="quality-icon">✦</div><div><b>Pro tip</b><p>Use measurable outcomes: %, users, revenue, time saved or performance gains.</p></div></div>
+      <button class="btn btn-primary btn-full" type="submit"><span>✦</span> Generate resume</button>
+      <p class="secure-note">Your content stays in this local application.</p>
+    </div>
+  </aside>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+document.getElementById('resumeForm')?.addEventListener('submit', function () {
+  if (!this.querySelector('input[name="name"]')?.value.trim()) return;
+  window.startWorkOverlay?.('Building your resume…', 'A few seconds while we structure everything.', [
+    'Structuring sections', 'Applying template', 'Polishing wording', 'Preparing preview'
+  ]);
+});
+</script>
+{% endblock %}

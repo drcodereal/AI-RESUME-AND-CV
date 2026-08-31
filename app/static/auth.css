@@ -1,0 +1,86 @@
+/* ===== Auth shell / card ===== */
+.auth-shell{min-height:70vh;display:grid;place-items:center;padding:30px 0 10px}
+.auth-card{width:min(440px,100%);padding:38px 34px 30px;position:relative;text-align:center}
+.auth-head h1{font-size:26px;margin:6px 0 6px}
+.auth-head p{color:#93a0ba;font-size:13px;line-height:1.6;margin:0 0 6px}
+.auth-note{color:#6ee7b7;font-size:12.5px;min-height:4px;margin:6px 0 0}
+.auth-error{color:#fb7185;font-size:12.5px;min-height:4px;margin:2px 0 8px}
+.auth-card form{text-align:left;margin-top:14px}
+.field{display:block;margin-bottom:14px}
+.field>span{display:block;font-size:11.5px;color:#9aa6bf;letter-spacing:.03em;margin-bottom:6px;font-weight:600}
+.field input{width:100%;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#f7f8ff;font:500 14px 'DM Sans';outline:none;transition:border-color .2s,background .2s}
+.field input:focus{border-color:#8b5cf6;background:rgba(139,92,246,.06)}
+.field input::placeholder{color:#5c6884}
+.pass-wrap{position:relative}
+.pass-wrap input{padding-right:44px}
+.toggle-pass{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:#8290aa;font-size:15px;cursor:pointer;padding:8px;border-radius:8px;line-height:1}
+.toggle-pass:hover{color:#dbe2f2;background:rgba(255,255,255,.06)}
+.toggle-pass.showing{color:#22d3ee}
+.match-msg{display:block;margin-top:6px;font-size:11.5px;min-height:14px}
+.match-msg.match-ok{color:#6ee7b7}
+.match-msg.match-bad{color:#fb7185}
+.field-row{display:flex;justify-content:space-between;align-items:center;margin:2px 0 16px;font-size:12px;color:#9aa6bf}
+.field-row a{color:#a78bfa;text-decoration:none}
+.auth-switch{margin-top:20px;color:#8290aa;font-size:12.5px}
+.auth-switch a{color:#a78bfa;font-weight:600;text-decoration:none}
+
+/* ===== Navbar auth area ===== */
+.auth-area{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-user{color:#c9d2e6;font-size:13px;font-weight:600;white-space:nowrap}
+.logout-btn{background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer;font:600 13px 'DM Sans'}
+
+/* ===== Husky mascot ===== */
+.husky{width:190px;height:174px;margin:-10px auto 6px;display:block;overflow:visible}
+.husky-shadow{fill:rgba(0,0,0,.28);filter:blur(3px)}
+.husky .head-group{transform-origin:120px 195px}
+.husky .ear{fill:#2c313e}
+.husky .ear-inner{fill:#c9cddb}
+.husky .head{fill:#eef1f7}
+.husky .blaze{fill:#ffffff}
+.husky .patch{fill:#242836}
+.husky .cheek{fill:#f5a98f;opacity:.55}
+.husky .eye-white{fill:#fff}
+.husky .iris{fill:#5fc0e6}
+.husky .pupil{fill:#12141c}
+.husky .glint{fill:#fff}
+.husky .nose{fill:#12141c}
+.husky .mouth-neutral,.husky .mouth-happy path:first-child{fill:none;stroke:#12141c;stroke-width:3;stroke-linecap:round}
+.husky .tongue{fill:#ef94a8}
+.husky .eyes-happy path{fill:none;stroke:#12141c;stroke-width:4;stroke-linecap:round}
+.husky .eyes-happy,.husky .mouth-happy{opacity:0;transition:opacity .18s ease}
+.husky .paw,.husky .wave-paw{fill:#eef1f7;stroke:#c9cddb;stroke-width:2}
+.husky .paw .toe,.husky .wave-paw .toe{fill:#eef1f7;stroke:#c9cddb;stroke-width:2}
+
+/* paws resting near the ears until a password field is active */
+.paws-cover{transform-origin:120px 45px;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .28s ease;opacity:0}
+.paw-left{transform:translate(86px,42px) scale(.8)}
+.paw-right{transform:translate(154px,42px) scale(.8)}
+
+/* small waving paw tucked beside the head, used during typing */
+.wave-paw{transform:translate(207px,128px) rotate(0deg);transform-origin:207px 108px;opacity:0}
+
+/* ----- state: password field focused → cover the eyes ----- */
+.husky.hide-eyes .paws-cover{opacity:1}
+.husky.hide-eyes .paw-left{transform:translate(86px,112px) scale(1)}
+.husky.hide-eyes .paw-right{transform:translate(154px,112px) scale(1)}
+.husky.hide-eyes .eyes-open{opacity:0;transition:opacity .15s ease}
+
+/* ----- state: typing name/email → greet with a random wiggle ----- */
+.husky.greeting .eyes-open{opacity:0}
+.husky.greeting .eyes-happy,.husky.greeting .mouth-happy{opacity:1}
+.husky.greeting .wave-paw{opacity:1;animation:pawWave .65s ease-in-out}
+.husky.greeting.greet-a .head-group{animation:tiltA .65s ease-in-out}
+.husky.greeting.greet-b .head-group{animation:tiltB .65s ease-in-out}
+.husky.greeting.greet-c .head-group{animation:tiltC .65s ease-in-out}
+
+@keyframes pawWave{0%{transform:translate(207px,128px) rotate(0)}25%{transform:translate(207px,128px) rotate(-22deg)}50%{transform:translate(207px,128px) rotate(12deg)}75%{transform:translate(207px,128px) rotate(-16deg)}100%{transform:translate(207px,128px) rotate(0)}}
+@keyframes tiltA{0%,100%{transform:rotate(0)}30%{transform:rotate(-7deg)}60%{transform:rotate(4deg)}}
+@keyframes tiltB{0%,100%{transform:rotate(0)}30%{transform:rotate(7deg)}60%{transform:rotate(-4deg)}}
+@keyframes tiltC{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-6px) rotate(-3deg)}50%{transform:translateY(0) rotate(3deg)}75%{transform:translateY(-3px) rotate(0)}}
+
+/* ----- wrong login → shake ----- */
+.husky.shake .head-group{animation:huskyShake .5s ease-in-out}
+@keyframes huskyShake{10%,90%{transform:translateX(-3px)}20%,80%{transform:translateX(5px)}30%,50%,70%{transform:translateX(-9px)}40%,60%{transform:translateX(9px)}}
+
+@media(max-width:520px){.auth-card{padding:30px 22px 24px}.husky{width:160px;height:146px}}
+@media(prefers-reduced-motion:reduce){.husky *{animation:none!important;transition:none!important}}

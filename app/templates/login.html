@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Sign in — ResumeAI{% endblock %}
+{% block body_class %}page-bg-login{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='auth.css') }}">{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card glass-card reveal">
+    {% include 'partials/_husky.html' %}
+    <div class="auth-head">
+      <h1>Welcome back</h1>
+      <p>Sign in to pick up where you left off.</p>
+    </div>
+    {% if just_registered %}<p class="auth-note show">Account created — sign in to continue.</p>{% endif %}
+    {% if error %}<p class="auth-error show" id="authError">{{ error }}</p>{% endif %}
+    <form method="post" id="loginForm" novalidate>
+      <input type="hidden" name="next" value="{{ next or '' }}">
+      <label class="field">
+        <span>Email address</span>
+        <input type="email" name="email" id="loginEmail" data-role="greet" placeholder="abc@gmail.com" autocomplete="email" required>
+      </label>
+      <label class="field pass-field">
+        <span>Password</span>
+        <div class="pass-wrap">
+          <input type="password" name="password" id="loginPassword" data-role="password" placeholder="Your password" autocomplete="current-password" required>
+          <button type="button" class="toggle-pass" data-target="loginPassword" aria-label="Show password">👁</button>
+        </div>
+      </label>
+      <button class="btn btn-primary btn-full" type="submit"><span class="btn-label">Sign in</span></button>
+    </form>
+    <p class="auth-switch">New to ResumeAI Studio? <a href="{{ url_for('main.register') }}{% if next %}?next={{ next }}{% endif %}">Create an account</a></p>
+  </div>
+</div>
+{% endblock %}

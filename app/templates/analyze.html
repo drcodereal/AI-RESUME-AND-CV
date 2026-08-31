@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Resume Analyzer — ResumeAI{% endblock %}
+{% block content %}
+<div class="page-title-row reveal"><div><div class="eyebrow"><span class="pulse-dot"></span> ATS intelligence</div><h1>Know exactly what your resume <span class="gradient-text">needs next.</span></h1><p>Upload a PDF or DOCX and optionally add the target job description for a deeper match report.</p></div><div class="step-badge">STEP <b>02</b> / 03</div></div>
+<form method="post" enctype="multipart/form-data" class="analyzer-layout" id="analyzeForm">
+  <div class="glass-card upload-panel reveal"><div class="upload-header"><div><span class="eyebrow">Resume input</span><h2>Drop your resume here</h2><p>PDF or DOCX · Maximize ATS compatibility</p></div><span class="file-type">PDF · DOCX</span></div>
+    <label class="dropzone" id="dropzone"><input type="file" name="resume" accept=".pdf,.docx" required><span class="upload-icon">↑</span><strong>Drag & drop your file</strong><small>or click to browse from your computer</small><span class="selected-file" id="selectedFile">No file selected</span></label>
+    <div class="upload-checks"><span>✓ Text extraction</span><span>✓ Section scan</span><span>✓ Keyword audit</span></div>
+  </div>
+  <div class="glass-card jd-panel reveal-right"><div class="upload-header"><div><span class="eyebrow">Optional but powerful</span><h2>Target job description</h2><p>Paste the vacancy text to calculate a keyword match.</p></div><span class="optional-badge">OPTIONAL</span></div><textarea name="job_description" rows="15" placeholder="Paste the complete job description here...&#10;&#10;The analyzer will identify relevant keywords and show what is missing from your resume."></textarea><div class="jd-tip"><span>⌁</span><p><b>Better tailoring starts here.</b> Use the exact job description whenever possible.</p></div><button class="btn btn-primary btn-full" type="submit"><span>◎</span> Analyze resume</button></div>
+</form>
+<section class="analysis-preview glass-card reveal"><div><span class="eyebrow">What you get</span><h2>A practical report, not just a number.</h2></div><div class="report-grid"><div><b>01</b><strong>Overall score</strong><span>Understand your current resume health.</span></div><div><b>02</b><strong>ATS score</strong><span>Check structure and searchable signals.</span></div><div><b>03</b><strong>Job match</strong><span>Find matched and missing keywords.</span></div><div><b>04</b><strong>Action plan</strong><span>See concrete improvements to make.</span></div></div></section>
+{% endblock %}
+{% block scripts %}
+<script>
+document.getElementById('analyzeForm')?.addEventListener('submit', function (e) {
+  const file = this.querySelector('input[name="resume"]');
+  if (!file || !file.files.length) return;
+  window.startWorkOverlay?.('Analyzing your resume…', 'Reading, scoring and matching keywords.', [
+    'Reading document', 'Scanning structure', 'Matching keywords', 'Compiling report'
+  ]);
+});
+</script>
+{% endblock %}

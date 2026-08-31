@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Create account — ResumeAI{% endblock %}
+{% block body_class %}page-bg-register{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='auth.css') }}">{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card glass-card reveal">
+    {% include 'partials/_husky.html' %}
+    <div class="auth-head">
+      <h1>Create your account</h1>
+      <p>Join ResumeAI Studio and start building resumes that get interviews.</p>
+    </div>
+    {% if error %}<p class="auth-error show" id="authError">{{ error }}</p>{% endif %}
+    <form method="post" id="registerForm" novalidate>
+      <input type="hidden" name="next" value="{{ next or '' }}">
+      <label class="field">
+        <span>Full name</span>
+        <input type="text" name="name" id="regName" data-role="greet" placeholder="e.g. Abc" autocomplete="name" required>
+      </label>
+      <label class="field">
+        <span>Email address</span>
+        <input type="email" name="email" id="regEmail" data-role="greet" placeholder="abc@gmail.com" autocomplete="email" required>
+      </label>
+      <label class="field pass-field">
+        <span>Password</span>
+        <div class="pass-wrap">
+          <input type="password" name="password" id="regPassword" data-role="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required>
+          <button type="button" class="toggle-pass" data-target="regPassword" aria-label="Show password">👁</button>
+        </div>
+      </label>
+      <label class="field pass-field">
+        <span>Confirm password</span>
+        <div class="pass-wrap">
+          <input type="password" name="confirm" id="regConfirm" data-role="password" placeholder="Re-enter your password" autocomplete="new-password" minlength="6" required>
+          <button type="button" class="toggle-pass" data-target="regConfirm" aria-label="Show password">👁</button>
+        </div>
+        <small class="match-msg" id="matchMsg"></small>
+      </label>
+      <button class="btn btn-primary btn-full" type="submit"><span class="btn-label">Create account</span></button>
+    </form>
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('main.login') }}{% if next %}?next={{ next }}{% endif %}">Sign in</a></p>
+  </div>
+</div>
+{% endblock %}
